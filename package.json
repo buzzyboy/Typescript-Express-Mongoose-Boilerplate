@@ -1,0 +1,38 @@
+{
+  "name": "api-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec ts-node src/server.ts -e ts",
+    "seed": "ts-node src/seed/SeedRunner",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test:watch": "nodemon -e ts --exec mocha -r ts-node/register test/**/*.spec.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.1",
+    "dotenv": "^6.1.0",
+    "express": "4.16.3",
+    "jwt-simple": "^0.5.5",
+    "mongoose": "^5.3.2",
+    "reflect-metadata": "^0.1.12",
+    "routing-controllers": "^0.7.7",
+    "typedi": "^0.8.0",
+    "typescript": "^3.1.2"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/chai": "^4.1.6",
+    "@types/express": "^4.16.0",
+    "@types/mocha": "^5.2.5",
+    "@types/mongoose": "^5.2.19",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typings": "^2.1.1"
+  }
+}
