@@ -1,10 +1,6 @@
-import {Body, Controller, Get, JsonController, Post, Req, Res, UnauthorizedError, UseBefore} from "routing-controllers";
+import {Body, JsonController, Post, Req, Res, UnauthorizedError} from "routing-controllers";
 import AuthService from "../services/AuthService";
 import ILoginModel from "../models/ILoginModel";
-
-const jwt = require('jsonwebtoken');
-import User from "../data/schemas/UserModel";
-import {AuthenticationMiddleware} from "../middleware/AuthenticationMiddleware";
 
 @JsonController('/auth')
 export default class AuthController {
@@ -24,12 +20,4 @@ export default class AuthController {
             throw new UnauthorizedError(result.error);
         }
     }
-
-    @UseBefore(AuthenticationMiddleware)
-    @Get('/test')
-    test(@Req() req) {
-        console.log(req.user);
-        return true;
-    }
-
 }
