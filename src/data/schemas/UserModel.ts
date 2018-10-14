@@ -1,5 +1,4 @@
 const jwt = require('jwt-simple');
-const passportLocalMongoose = require('passport-local-mongoose');
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
@@ -72,8 +71,6 @@ UserSchema.methods.comparePassword = function(password): Promise<boolean> {
         });
     });
 };
-
-UserSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model<IUser>('User', UserSchema);
 export default User;
