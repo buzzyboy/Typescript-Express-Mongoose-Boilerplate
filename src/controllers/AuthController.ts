@@ -15,20 +15,14 @@ export default class AuthController {
 
     @Post()
     async authenticate(@Body() body: ILoginModel, @Res() response, @Req() request) {
-        const user = await User.findOne({username: body.username});
-        if (!user) {
-            throw new UnauthorizedError('Incorrect username/password combination');
+        const result = await this.authService.authenticateUser(body.username, body.password);
+        if (result.isSuccess()) {
+            return {
+                token: result.data
+            };
+        } else {
+            throw new UnauthorizedError(result.error);
         }
-        const isCorrectPassword = await user.comparePassword(body.password);
-        if (!isCorrectPassword) {
-            throw new UnauthorizedError('Incorrect username/password combination');
-        }
-        const userModel = user.toJSON();
-        const token = jwt.sign(userModel, process.env.JWT_SECRET);
-        return {
-            user: userModel,
-            token,
-        };
     }
 
     @UseBefore(AuthenticationMiddleware)

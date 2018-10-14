@@ -1,4 +1,4 @@
-const jwt = require('jwt-simple');
+const jwt = require('jsonwebtoken');
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
@@ -58,7 +58,8 @@ UserSchema.pre('save', function(next) {
 });
 
 UserSchema.methods.createAccessToken = function (this: IUser) {
-    return jwt.encode(this.toJSON(), process.env.JWT_SECRET);
+    const token = jwt.sign(this.toJSON(), process.env.JWT_SECRET);
+    return token;
 };
 
 UserSchema.methods.comparePassword = function(password): Promise<boolean> {
