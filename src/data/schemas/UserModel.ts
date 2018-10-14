@@ -8,7 +8,6 @@ interface IUser extends mongoose.Document {
     email: string;
     createAccessToken(): string;
     comparePassword(password: string): Promise<boolean>;
-    serializeUser(): void;
 }
 
 export const UserSchema = new mongoose.Schema({
